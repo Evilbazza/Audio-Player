@@ -472,6 +472,23 @@ let accessToken   = null;
 let fileList      = [];
 let currentObjUrl = null;
 
+// ── Persist Client ID + Folder ID ─────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  const savedClient = localStorage.getItem('gd_client_id');
+  const savedFolder = localStorage.getItem('gd_folder_id');
+  if (savedClient) document.getElementById('client-id-input').value = savedClient;
+  if (savedFolder) document.getElementById('folder-id-input').value = savedFolder;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('client-id-input').addEventListener('input', function() {
+    localStorage.setItem('gd_client_id', this.value.trim());
+  });
+  document.getElementById('folder-id-input').addEventListener('input', function() {
+    localStorage.setItem('gd_folder_id', this.value.trim());
+  });
+});
+
 const AUDIO_MIMES = new Set([
   'audio/mpeg', 'audio/ogg', 'audio/wav',
   'audio/x-m4a', 'audio/mp4', 'audio/flac'
