@@ -6,16 +6,16 @@
 <title>Drive Audio Player</title>
 <style>
   :root {
-    --bg:        #0f1117;
-    --surface:   #1a1d27;
-    --surface2:  #22263a;
-    --border:    #2e3248;
-    --accent:    #e8a838;
-    --accent2:   #c47f1a;
-    --text:      #e8e9f0;
-    --muted:     #7b80a0;
+    --bg:        #0d1f2d;
+    --surface:   #1a3040;
+    --surface2:  #213d50;
+    --border:    #2a4a5e;
+    --accent:    #4ecdc4;
+    --accent2:   #38b2aa;
+    --text:      #cce8e6;
+    --muted:     #6a9eaa;
     --error:     #e8504a;
-    --success:   #4aab72;
+    --success:   #4ecdc4;
     --radius:    12px;
     --font-mono: 'Courier New', Courier, monospace;
   }
@@ -48,114 +48,6 @@
     letter-spacing: 0.06em;
   }
 
-  /* ── COLLAPSIBLE SETUP ── */
-  .setup-wrap {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 20px;
-    overflow: hidden;
-  }
-
-  .setup-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px;
-    cursor: pointer;
-    user-select: none;
-    gap: 8px;
-    background: none;
-    border: none;
-    color: var(--text);
-    width: 100%;
-    text-align: left;
-    font-family: inherit;
-    font-size: 0.9rem;
-  }
-
-  .setup-toggle:focus-visible { outline: 2px solid var(--accent); }
-
-  .setup-label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    text-transform: uppercase;
-    flex: 1;
-  }
-
-  .setup-badge {
-    background: var(--surface2);
-    color: var(--accent);
-    font-size: 0.7rem;
-    font-family: var(--font-mono);
-    padding: 2px 8px;
-    border-radius: 20px;
-    letter-spacing: 0.05em;
-    white-space: nowrap;
-  }
-
-  .chevron {
-    color: var(--muted);
-    transition: transform 0.25s ease;
-    font-size: 0.85rem;
-    flex-shrink: 0;
-  }
-
-  .setup-wrap.open .chevron { transform: rotate(180deg); }
-
-  .setup-body {
-    display: none;
-    padding: 0 16px 16px;
-    border-top: 1px solid var(--border);
-  }
-
-  .setup-wrap.open .setup-body { display: block; }
-
-  .setup-step {
-    margin-top: 16px;
-  }
-
-  .step-title {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--accent);
-    letter-spacing: 0.06em;
-    margin-bottom: 6px;
-  }
-
-  .setup-body ul, .setup-body ol {
-    padding-left: 20px;
-    color: var(--muted);
-    font-size: 0.88rem;
-    line-height: 1.7;
-  }
-
-  .setup-body li { margin-bottom: 2px; }
-
-  .setup-body code {
-    font-family: var(--font-mono);
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-size: 0.85em;
-    color: var(--text);
-  }
-
-  .note {
-    margin-top: 10px;
-    padding: 10px 12px;
-    background: var(--surface2);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 6px 6px 0;
-    font-size: 0.82rem;
-    color: var(--muted);
-    font-family: var(--font-mono);
-  }
-
-  /* ── CARD ── */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -191,7 +83,6 @@
   input[type="text"]:focus { border-color: var(--accent); }
   input[type="text"]::placeholder { color: var(--muted); opacity: 0.7; }
 
-  /* ── BUTTONS ── */
   .btn {
     display: flex;
     align-items: center;
@@ -213,12 +104,7 @@
   .btn:active { transform: scale(0.97); }
   .btn:disabled { opacity: 0.4; cursor: default; transform: none; }
 
-  .btn-primary {
-    background: var(--accent);
-    color: #0f1117;
-    font-weight: bold;
-  }
-
+  .btn-primary { background: var(--accent); color: #0d1f2d; font-weight: bold; }
   .btn-primary:not(:disabled):hover { background: var(--accent2); }
 
   .btn-secondary {
@@ -227,10 +113,8 @@
     border: 1px solid var(--border);
     margin-top: 10px;
   }
-
   .btn-secondary:not(:disabled):hover { border-color: var(--accent); color: var(--accent); }
 
-  /* ── PLAY PANEL ── */
   #play-panel { display: none; }
 
   .filename {
@@ -256,11 +140,8 @@
     background: var(--surface2);
   }
 
-  audio::-webkit-media-controls-panel {
-    background: var(--surface2);
-  }
+  audio::-webkit-media-controls-panel { background: var(--surface2); }
 
-  /* ── STATUS ── */
   .status-row {
     display: flex;
     align-items: center;
@@ -269,18 +150,17 @@
   }
 
   .status-dot {
-    width: 10px;
-    height: 10px;
+    width: 10px; height: 10px;
     border-radius: 50%;
     flex-shrink: 0;
     background: var(--muted);
     transition: background 0.3s;
   }
 
-  .status-dot.loading  { background: var(--accent);  animation: pulse 1s ease-in-out infinite; }
-  .status-dot.playing  { background: var(--success);  animation: pulse 1.5s ease-in-out infinite; }
+  .status-dot.loading  { background: var(--accent); animation: pulse 1s ease-in-out infinite; }
+  .status-dot.playing  { background: var(--success); animation: pulse 1.5s ease-in-out infinite; }
   .status-dot.finished { background: var(--muted); animation: none; }
-  .status-dot.error    { background: var(--error);  animation: none; }
+  .status-dot.error    { background: var(--error); animation: none; }
 
   @keyframes pulse {
     0%, 100% { opacity: 1; }
@@ -295,6 +175,7 @@
   }
 
   .error-msg {
+    display: none;
     color: var(--error);
     font-family: var(--font-mono);
     font-size: 0.8rem;
@@ -302,37 +183,28 @@
     background: rgba(232,80,74,0.08);
     border: 1px solid rgba(232,80,74,0.25);
     border-radius: 8px;
-    display: none;
     line-height: 1.5;
   }
-
   .error-msg.visible { display: block; }
 
-  /* ── DIVIDER ── */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 14px 0;
-  }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
 
-  /* ── SIGNED IN INDICATOR ── */
   .signed-in-row {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 8px;
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--success);
+    color: var(--accent);
     letter-spacing: 0.06em;
-    display: none;
+    margin-top: 12px;
   }
-
   .signed-in-row.visible { display: flex; }
 
-  .dot-green {
+  .dot-teal {
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--success);
+    background: var(--accent);
     flex-shrink: 0;
   }
 </style>
@@ -340,190 +212,89 @@
 <body>
 
 <h1>Drive Audio Player</h1>
-<p class="tagline">// random · local · private</p>
+<p class="tagline">// random · private · offline-ready</p>
 
-<!-- ── SETUP INSTRUCTIONS ── -->
-<div class="setup-wrap" id="setup-wrap">
-  <button class="setup-toggle" id="setup-toggle" aria-expanded="false" aria-controls="setup-body">
-    <span class="setup-label">Setup Instructions</span>
-    <span class="setup-badge">One-time</span>
-    <span class="chevron">▼</span>
-  </button>
-  <div class="setup-body" id="setup-body" role="region">
-
-    <div class="setup-step">
-      <p class="step-title">STEP 1 — Create a Google Cloud Project</p>
-      <ul>
-        <li>Go to <code>https://console.cloud.google.com</code> and sign in</li>
-        <li>Click <strong>Select a project</strong> at the top → <strong>New Project</strong></li>
-        <li>Give it any name (e.g. <em>Audio Player</em>), click <strong>Create</strong></li>
-        <li>Wait for it to create, then confirm it is selected in the top bar</li>
-      </ul>
-    </div>
-
-    <div class="setup-step">
-      <p class="step-title">STEP 2 — Enable the Google Drive API</p>
-      <ul>
-        <li>Left menu → <strong>APIs &amp; Services</strong> → <strong>Library</strong></li>
-        <li>Search for <em>Google Drive API</em>, click it, then click <strong>Enable</strong></li>
-      </ul>
-    </div>
-
-    <div class="setup-step">
-      <p class="step-title">STEP 3 — Configure the OAuth Consent Screen</p>
-      <ul>
-        <li>Left menu → <strong>APIs &amp; Services</strong> → <strong>OAuth consent screen</strong></li>
-        <li>Select <strong>External</strong>, click <strong>Create</strong></li>
-        <li>Fill in App name, User support email, Developer contact email</li>
-        <li>Click <strong>Save and Continue</strong> through all remaining steps</li>
-        <li>On the final summary page, click <strong>Back to Dashboard</strong></li>
-        <li>Click <strong>Publish App</strong> and confirm — this allows your Google account to sign in</li>
-      </ul>
-    </div>
-
-    <div class="setup-step">
-      <p class="step-title">STEP 4 — Create an OAuth Client ID</p>
-      <ul>
-        <li>Left menu → <strong>APIs &amp; Services</strong> → <strong>Credentials</strong></li>
-        <li>Click <strong>+ Create Credentials</strong> → <strong>OAuth client ID</strong></li>
-        <li>Application type: <strong>Web application</strong></li>
-        <li>Under <em>Authorised JavaScript origins</em> → <strong>+ Add URI</strong></li>
-        <li>Type exactly: <code>null</code> — required for local HTML files in Android Chrome</li>
-        <li>Click <strong>Create</strong> — copy the Client ID from the popup</li>
-        <li>It looks like: <code>123456789-abc123.apps.googleusercontent.com</code></li>
-      </ul>
-    </div>
-
-    <div class="setup-step">
-      <p class="step-title">STEP 5 — Use this App</p>
-      <ul>
-        <li>Paste your Client ID into the field below</li>
-        <li>Tap <em>Sign in with Google</em> and approve access</li>
-        <li>Open a folder in Google Drive — copy the long ID at the end of the URL after <code>/folders/</code></li>
-        <li>Paste that Folder ID and tap <em>Load &amp; Play</em></li>
-      </ul>
-    </div>
-
-    <div class="note">ℹ After completing setup once, you can collapse this panel — your credentials are never stored.</div>
-
-  </div>
-</div>
-
-<!-- ── AUTH CARD ── -->
 <div class="card" id="auth-card">
   <label class="field-label" for="client-id-input">OAuth Client ID</label>
   <input
     type="text"
     id="client-id-input"
     placeholder="123456789-abc.apps.googleusercontent.com"
-    autocomplete="off"
-    autocorrect="off"
-    autocapitalize="off"
-    spellcheck="false"
+    autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
   >
-
-  <div style="margin-top: 14px;">
+  <div style="margin-top:14px;">
     <button class="btn btn-primary" id="signin-btn" onclick="startSignIn()">Sign in with Google</button>
   </div>
-
-  <div class="signed-in-row" id="signed-in-row" style="margin-top:12px;">
-    <span class="dot-green"></span>
+  <div class="signed-in-row" id="signed-in-row">
+    <span class="dot-teal"></span>
     <span>Signed in</span>
   </div>
 </div>
 
-<!-- ── FOLDER + PLAY CARD ── -->
 <div class="card" id="folder-card" style="display:none;">
   <label class="field-label" for="folder-id-input">Google Drive Folder ID</label>
   <input
     type="text"
     id="folder-id-input"
     placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs"
-    autocomplete="off"
-    autocorrect="off"
-    autocapitalize="off"
-    spellcheck="false"
+    autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
   >
   <button class="btn btn-primary" style="margin-top:14px;" onclick="loadAndPlay()">▶ Load &amp; Play</button>
 </div>
 
-<!-- ── PLAY PANEL ── -->
 <div class="card" id="play-panel">
   <div class="filename" id="filename-display">—</div>
-
   <audio id="audio-player" controls></audio>
-
   <div class="status-row">
     <div class="status-dot" id="status-dot"></div>
     <span id="status-text">Idle</span>
   </div>
-
   <div class="error-msg" id="error-msg"></div>
-
   <hr class="divider">
-
   <button class="btn btn-secondary" id="another-btn" onclick="playAnother()" disabled>↺ Play Another</button>
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async></script>
 <script>
-// ── State ──────────────────────────────────────────────
 let accessToken   = null;
 let fileList      = [];
 let currentObjUrl = null;
 
-// ── Persist Client ID + Folder ID ─────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  const savedClient = localStorage.getItem('gd_client_id');
-  const savedFolder = localStorage.getItem('gd_folder_id');
-  if (savedClient) document.getElementById('client-id-input').value = savedClient;
-  if (savedFolder) document.getElementById('folder-id-input').value = savedFolder;
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('client-id-input').addEventListener('input', function() {
-    localStorage.setItem('gd_client_id', this.value.trim());
-  });
-  document.getElementById('folder-id-input').addEventListener('input', function() {
-    localStorage.setItem('gd_folder_id', this.value.trim());
-  });
-});
-
 const AUDIO_MIMES = new Set([
-  'audio/mpeg', 'audio/ogg', 'audio/wav',
-  'audio/x-m4a', 'audio/mp4', 'audio/flac'
+  'audio/mpeg','audio/ogg','audio/wav','audio/x-m4a','audio/mp4','audio/flac'
 ]);
 
-// ── DOM refs ───────────────────────────────────────────
-const clientIdInput  = () => document.getElementById('client-id-input').value.trim();
-const folderIdInput  = () => document.getElementById('folder-id-input').value.trim();
-const signInBtn      = document.getElementById('signin-btn');
-const signedInRow    = document.getElementById('signed-in-row');
-const authCard       = document.getElementById('auth-card');
-const folderCard     = document.getElementById('folder-card');
-const playPanel      = document.getElementById('play-panel');
-const audioPlayer    = document.getElementById('audio-player');
-const filenameDisplay= document.getElementById('filename-display');
-const statusDot      = document.getElementById('status-dot');
-const statusText     = document.getElementById('status-text');
-const errorMsg       = document.getElementById('error-msg');
-const anotherBtn     = document.getElementById('another-btn');
-
-// ── Setup toggle ───────────────────────────────────────
-document.getElementById('setup-toggle').addEventListener('click', function() {
-  const wrap = document.getElementById('setup-wrap');
-  const open = wrap.classList.toggle('open');
-  this.setAttribute('aria-expanded', open);
+window.addEventListener('DOMContentLoaded', () => {
+  const ci = document.getElementById('client-id-input');
+  const fi = document.getElementById('folder-id-input');
+  const sc = localStorage.getItem('gd_client_id');
+  const sf = localStorage.getItem('gd_folder_id');
+  if (sc) ci.value = sc;
+  if (sf) fi.value = sf;
+  ci.addEventListener('input', () => localStorage.setItem('gd_client_id', ci.value.trim()));
+  fi.addEventListener('input', () => localStorage.setItem('gd_folder_id', fi.value.trim()));
 });
 
-// ── Status helpers ─────────────────────────────────────
+const clientIdInput   = () => document.getElementById('client-id-input').value.trim();
+const folderIdInput   = () => document.getElementById('folder-id-input').value.trim();
+const signInBtn       = document.getElementById('signin-btn');
+const signedInRow     = document.getElementById('signed-in-row');
+const folderCard      = document.getElementById('folder-card');
+const playPanel       = document.getElementById('play-panel');
+const audioPlayer     = document.getElementById('audio-player');
+const filenameDisplay = document.getElementById('filename-display');
+const statusDot       = document.getElementById('status-dot');
+const statusText      = document.getElementById('status-text');
+const errorMsg        = document.getElementById('error-msg');
+const anotherBtn      = document.getElementById('another-btn');
+
 function setStatus(state, message) {
-  statusDot.className  = 'status-dot ' + state;
+  statusDot.className    = 'status-dot ' + state;
   statusText.textContent = message;
 }
 
 function showError(msg) {
-  errorMsg.textContent  = msg;
+  errorMsg.textContent = msg;
   errorMsg.classList.add('visible');
   setStatus('error', 'Error');
 }
@@ -533,29 +304,23 @@ function clearError() {
   errorMsg.classList.remove('visible');
 }
 
-// ── OAuth / GIS ────────────────────────────────────────
 function startSignIn() {
   clearError();
   const clientId = clientIdInput();
-  if (!clientId) {
-    showError('Please paste your OAuth Client ID first.');
-    return;
-  }
+  if (!clientId) { showError('Please paste your OAuth Client ID first.'); return; }
 
-  // Initialise GIS token client on demand (client ID read from input)
   const tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: clientId,
     scope: 'https://www.googleapis.com/auth/drive.readonly',
     callback: handleTokenResponse,
     error_callback: handleTokenError,
   });
-
   tokenClient.requestAccessToken({ prompt: 'consent' });
 }
 
-function handleTokenResponse(tokenResponse) {
-  if (tokenResponse && tokenResponse.access_token) {
-    accessToken = tokenResponse.access_token;
+function handleTokenResponse(r) {
+  if (r && r.access_token) {
+    accessToken = r.access_token;
     signInBtn.textContent    = '✓ Signed In';
     signInBtn.disabled       = true;
     signedInRow.classList.add('visible');
@@ -570,28 +335,18 @@ function handleTokenError(err) {
   showError('OAuth error: ' + (err.message || err.type || JSON.stringify(err)));
 }
 
-// ── Drive API ──────────────────────────────────────────
 async function loadAndPlay() {
   clearError();
   const folderId = folderIdInput();
-  if (!folderId) {
-    showError('Please paste a Google Drive Folder ID.');
-    return;
-  }
-  if (!accessToken) {
-    showError('Not signed in. Please sign in with Google first.');
-    return;
-  }
+  if (!folderId)    { showError('Please paste a Google Drive Folder ID.'); return; }
+  if (!accessToken) { showError('Not signed in. Please sign in with Google first.'); return; }
 
   setStatus('loading', 'Loading file list…');
   playPanel.style.display = 'block';
   anotherBtn.disabled     = true;
   fileList = [];
 
-  const mimeFilter = [...AUDIO_MIMES]
-    .map(m => `mimeType='${m}'`)
-    .join(' or ');
-
+  const mimeFilter = [...AUDIO_MIMES].map(m => `mimeType='${m}'`).join(' or ');
   const params = new URLSearchParams({
     q: `'${folderId}' in parents and (${mimeFilter}) and trashed=false`,
     fields: 'files(id,name,mimeType)',
@@ -603,32 +358,27 @@ async function loadAndPlay() {
       `https://www.googleapis.com/drive/v3/files?${params}`,
       { headers: { Authorization: `Bearer ${accessToken}` } }
     );
-
     if (res.status === 401) { showError('Auth failure (401). Your token may have expired — please sign in again.'); return; }
     if (!res.ok)            { showError(`Drive API error: ${res.status} ${res.statusText}`); return; }
 
     const data = await res.json();
-    fileList   = data.files || [];
+    fileList = data.files || [];
 
     if (fileList.length === 0) {
       showError('No audio files found in that folder. Supported formats: MP3, OGG, WAV, M4A, FLAC.');
       setStatus('', 'Idle');
       return;
     }
-
     playRandomFile();
-
   } catch (err) {
     showError('Network error fetching file list: ' + err.message);
   }
 }
 
-// ── Random pick & stream ───────────────────────────────
 async function playRandomFile() {
   clearError();
   if (fileList.length === 0) { showError('No files cached.'); return; }
 
-  // Stop any current playback
   audioPlayer.pause();
   revokeCurrentUrl();
 
@@ -642,13 +392,11 @@ async function playRandomFile() {
       `https://www.googleapis.com/drive/v3/files/${file.id}?alt=media`,
       { headers: { Authorization: `Bearer ${accessToken}` } }
     );
-
     if (res.status === 401) { showError('Auth failure (401). Please sign in again.'); return; }
     if (!res.ok)            { showError(`Fetch error: ${res.status} ${res.statusText}`); return; }
 
     const blob    = await res.blob();
     currentObjUrl = URL.createObjectURL(blob);
-
     audioPlayer.src  = currentObjUrl;
     audioPlayer.loop = false;
 
@@ -657,7 +405,6 @@ async function playRandomFile() {
       revokeCurrentUrl();
       anotherBtn.disabled = false;
     };
-
     audioPlayer.onerror = () => {
       showError('Playback error. The file may be in an unsupported format.');
       revokeCurrentUrl();
@@ -666,7 +413,6 @@ async function playRandomFile() {
 
     setStatus('playing', 'Playing');
     anotherBtn.disabled = false;
-
     await audioPlayer.play();
 
   } catch (err) {
@@ -676,15 +422,10 @@ async function playRandomFile() {
   }
 }
 
-function playAnother() {
-  if (fileList.length > 0) playRandomFile();
-}
+function playAnother() { if (fileList.length > 0) playRandomFile(); }
 
 function revokeCurrentUrl() {
-  if (currentObjUrl) {
-    URL.revokeObjectURL(currentObjUrl);
-    currentObjUrl = null;
-  }
+  if (currentObjUrl) { URL.revokeObjectURL(currentObjUrl); currentObjUrl = null; }
 }
 </script>
 </body>
