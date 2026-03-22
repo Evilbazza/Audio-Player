@@ -136,11 +136,16 @@
     height: 48px;
     border-radius: 8px;
     outline: none;
-    accent-color: var(--accent);
+    accent-color: #cce8e6;
+    color-scheme: dark;
     background: var(--surface2);
   }
 
   audio::-webkit-media-controls-panel { background: var(--surface2); }
+  audio::-webkit-media-controls-current-time-display,
+  audio::-webkit-media-controls-time-remaining-display { color: #cce8e6; }
+  audio::-webkit-media-controls-play-button { color: #cce8e6; }
+  audio::-webkit-media-controls-timeline { accent-color: #cce8e6; }
 
   .status-row {
     display: flex;
