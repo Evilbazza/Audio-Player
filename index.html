@@ -4,6 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Drive Audio Player</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiI+CiAgPHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSI0MCIgZmlsbD0iIzBkMWYyZCIvPgogIDxyZWN0IHg9IjIwIiB5PSI4NiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjIwIiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9IjQ2IiB5PSI2OCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjU2IiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9IjcyIiB5PSI1MCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjkyIiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9Ijk4IiB5PSI2MiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjY4IiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9IjEyNCIgeT0iNzYiIHdpZHRoPSIxOCIgaGVpZ2h0PSI0MCIgcng9IjQiIGZpbGw9IiM0ZWNkYzQiLz4KICA8cmVjdCB4PSIxNTAiIHk9Ijg0IiB3aWR0aD0iMTgiIGhlaWdodD0iMjQiIHJ4PSI0IiBmaWxsPSIjNGVjZGM0Ii8+Cjwvc3ZnPgo=">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiI+CiAgPHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSI0MCIgZmlsbD0iIzBkMWYyZCIvPgogIDxyZWN0IHg9IjIwIiB5PSI4NiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjIwIiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9IjQ2IiB5PSI2OCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjU2IiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9IjcyIiB5PSI1MCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjkyIiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9Ijk4IiB5PSI2MiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjY4IiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9IjEyNCIgeT0iNzYiIHdpZHRoPSIxOCIgaGVpZ2h0PSI0MCIgcng9IjQiIGZpbGw9IiM0ZWNkYzQiLz4KICA8cmVjdCB4PSIxNTAiIHk9Ijg0IiB3aWR0aD0iMTgiIGhlaWdodD0iMjQiIHJ4PSI0IiBmaWxsPSIjNGVjZGM0Ii8+Cjwvc3ZnPgo=">
+<meta name="theme-color" content="#0d1f2d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Audio Player">
+<script>
+  const _manifest = {
+    name: "Drive Audio Player",
+    short_name: "Audio Player",
+    start_url: ".",
+    display: "standalone",
+    background_color: "#0d1f2d",
+    theme_color: "#0d1f2d",
+    icons: [{
+      src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiI+CiAgPHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSI0MCIgZmlsbD0iIzBkMWYyZCIvPgogIDxyZWN0IHg9IjIwIiB5PSI4NiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjIwIiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9IjQ2IiB5PSI2OCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjU2IiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9IjcyIiB5PSI1MCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjkyIiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9Ijk4IiB5PSI2MiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjY4IiByeD0iNCIgZmlsbD0iIzRlY2RjNCIvPgogIDxyZWN0IHg9IjEyNCIgeT0iNzYiIHdpZHRoPSIxOCIgaGVpZ2h0PSI0MCIgcng9IjQiIGZpbGw9IiM0ZWNkYzQiLz4KICA8cmVjdCB4PSIxNTAiIHk9Ijg0IiB3aWR0aD0iMTgiIGhlaWdodD0iMjQiIHJ4PSI0IiBmaWxsPSIjNGVjZGM0Ii8+Cjwvc3ZnPgo=",
+      sizes: "192x192",
+      type: "image/svg+xml"
+    }]
+  };
+  const _mblob = new Blob([JSON.stringify(_manifest)], {type: 'application/json'});
+  const _murl  = URL.createObjectURL(_mblob);
+  const _mlink = document.createElement('link');
+  _mlink.rel   = 'manifest';
+  _mlink.href  = _murl;
+  document.head.appendChild(_mlink);
+</script>
 <style>
   :root {
     --bg:        #0d1f2d;
